@@ -7,7 +7,6 @@ const findValid = (rules) => {
   rules.forEach((item) => {
     if (!item) return
     [rule, min, max, char, password] = regex.exec(item)
-    const count = new RegExp(`{${char}}*`,'g')
     const chars = password.split(char).length - 1
     if (chars >= min && chars <= max) {
       valid++
@@ -24,8 +23,6 @@ const findValid2 = (rules) => {
   rules.forEach((item) => {
     if (!item) return
     [rule, min, max, char, password] = regex.exec(item)
-    const count = new RegExp(`{${char}}*`,'g')
-    const chars = password.split(char).length - 1
     if ((password[min-1] === char || password[max-1] === char) && password[min-1] !== password[max-1]) {
       valid++
     }
