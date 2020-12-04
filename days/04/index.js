@@ -1,6 +1,5 @@
 const readInput = require('../readInput')
 
-const required = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
 const validation = {
   byr: (val) => val >= 1920 && val <= 2020,
   iyr: (val) => val >= 2010 && val <= 2020,
@@ -10,9 +9,10 @@ const validation = {
     const match = regex.exec(val)
     if (match) {
       const [orig, hgt, unit] = match
-      if ((unit === 'cm' && hgt >= 150 && hgt <= 193) || 
-      (unit === 'in' && hgt >= 59 && hgt <= 76)) {
-        return true
+      if (
+        (unit === 'cm' && hgt >= 150 && hgt <= 193) || 
+        (unit === 'in' && hgt >= 59 && hgt <= 76)) {
+          return true
       }
     }
     return false
@@ -25,8 +25,9 @@ const validation = {
   pid: (val) => val.length === 9
 }
 
-const solution = (data, required, validation) => {
+const solution = (data, validation) => {
   const items = data.split(/\n\n/).map((set) => set.replace(/\r?\n/g, ' '))
+  const required = Object.keys(validation)
   const regex = new RegExp(`^${required.reduce((regex, req) => regex += `(?=.*\\b${req}:(#?\\w*)\\b)`, '')}.+`)
 
   let valid = 0
@@ -57,5 +58,5 @@ const solution = (data, required, validation) => {
 }
 
 const data = readInput('./input.txt').then((data) => {
-  console.log(solution(data, required, validation))
+  console.log(solution(data, validation))
 })
