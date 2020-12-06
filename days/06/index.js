@@ -20,10 +20,10 @@ const solution2 = (data, validation) => {
 
   items.forEach((item) => {
     const answers = item.split(/\r?\n/g).map((person) => person.split(''))
-    const result = answers.shift().reduce(function(res, v) {
-      if (res.indexOf(v) === -1 && answers.every(function(a) {
-          return a.indexOf(v) !== -1;
-      })) res.push(v);
+    const result = answers.shift().reduce((res, v) => {
+      if (res.indexOf(v) === -1 && answers.every((a) => (
+          a.indexOf(v) !== -1
+      ))) res.push(v);
       return res;
   }, []);
     total += result.length
