@@ -1,4 +1,3 @@
-const { listeners } = require('process')
 const readInput = require('../readInput')
 
 const myBag = 'shiny gold'
